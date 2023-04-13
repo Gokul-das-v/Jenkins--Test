@@ -14,6 +14,7 @@ CHANNELS = {
 
 @app.route('/')
 def index():
+  #using rapid API
   url = "https://youtube138.p.rapidapi.com/channel/videos/"
 
   querystring = {"id":CHANNELS["pm"],"hl":"en","gl":"US"}
@@ -28,7 +29,8 @@ def index():
   data =response.json()
   contends =data["contents"]
 
-  filtereddata = [videos["video"] for videos in contends if videos["video"]["publishedTimeText"] ]
+  #filtering out only video dictionary
+  filtereddata = [videos["video"] for videos in contends if videos["video"]["publishedTimeText"] ] 
   
 
   return render_template("index.html",filtereddata=filtereddata)
